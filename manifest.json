@@ -1,0 +1,27 @@
+{
+  "name": "EFB Robinson R44 II",
+  "short_name": "EFB R44",
+  "description": "Electronic Flight Bag para Robinson R44 II — Checklists, Performance, Peso y Balance, Curso",
+  "start_url": "/EFB-Robinson-R44/",
+  "scope": "/EFB-Robinson-R44/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#060c18",
+  "theme_color": "#f5a623",
+  "lang": "es",
+  "categories": ["aviation", "utilities"],
+  "icons": [
+    {
+      "src": "icons/icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

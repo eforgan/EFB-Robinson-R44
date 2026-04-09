@@ -161,6 +161,11 @@ const App = {
 document.addEventListener('DOMContentLoaded', () => {
   App.init();
 
+  // Registrar Service Worker (offline + PWA instalable)
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  }
+
   // Prevenir zoom en doble-tap en tablet
   document.addEventListener('touchstart', (e) => {
     if (e.touches.length > 1) e.preventDefault();
