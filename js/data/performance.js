@@ -107,8 +107,8 @@ const PERF_DATA = {
     descentRate: 1600,      // FPM — tasa de descenso típica
     glideRatio: '4:1',      // Relación planeo horizontal:vertical (aprox)
     rpmRange: '90-110%',    // Rango RPM de rotor en autorrotación
-    flareHeight: 40,        // ft AGL para iniciar flare
-    cushionHeight: 8,       // ft AGL para colectivo cushion
+    flareHeight: 100,       // ft AGL para iniciar flare (POH Sec.11)
+    cushionHeight: 12,      // ft AGL para colectivo cushion (rango 10-15 ft)
     table: [
       { alt: 1000, fwd90: 0.9, fwd60: 0.6 },
       { alt: 2000, fwd90: 1.8, fwd60: 1.2 },

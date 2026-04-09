@@ -45,16 +45,19 @@
         <!-- Imagen real del Robinson R44 II (Wikimedia Commons, CC BY-SA) -->
         <div class="r44-photo-gallery">
           <img class="r44-photo r44-photo-active"
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Robinson_R44_raven_II.jpg/640px-Robinson_R44_raven_II.jpg"
-            alt="Robinson R44 II Raven II"
+            src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Robinson_R44_raven_II.jpg?width=640"
+            alt="Robinson R44 II"
+            crossorigin="anonymous"
             onerror="this.style.display='none'">
           <img class="r44-photo"
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/N9097P_Robinson_R44_Raven_II_%28cropped%29.jpg/640px-N9097P_Robinson_R44_Raven_II_%28cropped%29.jpg"
+            src="https://commons.wikimedia.org/wiki/Special:Redirect/file/N9097P_Robinson_R44_Raven_II_(cropped).jpg?width=640"
             alt="Robinson R44 II en vuelo"
+            crossorigin="anonymous"
             onerror="this.style.display='none'">
           <img class="r44-photo"
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Robinson_R44_Raven_II_cockpit.jpg/640px-Robinson_R44_Raven_II_cockpit.jpg"
+            src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Robinson_R44_Raven_II_cockpit.jpg?width=640"
             alt="Cabina Robinson R44 II"
+            crossorigin="anonymous"
             onerror="this.style.display='none'">
         </div>
         <div class="home-specs">
@@ -110,7 +113,10 @@
     <section id="screen-checklists" class="screen">
       <div class="two-panel">
         <div class="panel-left" id="cl-list-panel">
-          <div class="panel-header">LISTAS DE VERIFICACIÓN</div>
+          <div class="panel-header" style="display:flex;justify-content:space-between;align-items:center">
+            <span>LISTAS DE VERIFICACIÓN</span>
+            <button class="btn-secondary" style="font-size:10px;padding:4px 8px" onclick="ChecklistModule.resetAll()">↺ Nuevo vuelo</button>
+          </div>
           <div class="cl-category">
             <div class="cl-cat-label">PROCEDIMIENTOS NORMALES</div>
             <div id="cl-normal-buttons"></div>
@@ -140,6 +146,12 @@
           <button class="perf-tab" data-tab="fuel">Combustible</button>
           <button class="perf-tab" data-tab="autorot">Autorrotación</button>
           <button class="perf-tab tab-danger" data-tab="hv">Curva H-V</button>
+          <button class="perf-tab" data-tab="vne">Vne / Velo.</button>
+          <button class="perf-tab tab-told" data-tab="told">TOLD Card</button>
+          <button class="perf-tab tab-danger" data-tab="vrs">Curva VRS</button>
+          <button class="perf-tab" data-tab="timer">Cronómetro</button>
+          <button class="perf-tab" data-tab="units">Conversor</button>
+          <button class="perf-tab" data-tab="route">Ruta</button>
         </div>
       </div>
       <div id="perf-content" class="perf-content"></div>

@@ -166,6 +166,25 @@ const ChecklistModule = {
     if (btn) btn.textContent = `${checked}/${total}`;
   },
 
+  /* ─── Reiniciar TODAS las listas (nuevo vuelo) ─── */
+  resetAll() {
+    if (confirm('¿Reiniciar TODAS las listas de verificación?\nUsar al inicio de cada nuevo vuelo.')) {
+      this.checks = {};
+      this._saveToStorage();
+      this._renderListButtons('cl-normal-buttons', CHECKLISTS.normal, false);
+      this._renderListButtons('cl-emergency-buttons', CHECKLISTS.emergency, true);
+      const panel = document.getElementById('cl-content-panel');
+      if (panel) {
+        panel.innerHTML = `
+          <div class="checklist-placeholder">
+            <div class="placeholder-icon">✅</div>
+            <p>Listas reiniciadas — Seleccione una lista de verificación</p>
+          </div>
+        `;
+      }
+    }
+  },
+
   /* ─── Persistencia localStorage ─── */
   _saveToStorage() {
     const data = {};

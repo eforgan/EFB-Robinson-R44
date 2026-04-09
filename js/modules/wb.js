@@ -36,9 +36,10 @@ const WBModule = {
         <div class="wb-section-title">📋 Peso Vacío Equipado (BEW)</div>
         <div class="wb-row-3">
           <label class="wb-field-label">Peso vacío</label>
-          <input type="number" id="wb-bew" value="${bew.defaultWeight}" min="1200" max="2000">
+          <input type="number" id="wb-bew" value="${bew.defaultWeight}" min="1200" max="2000" oninput="WBModule._showKg('wb-bew','kg-bew');WBModule._liveUpdate()">
           <span class="wb-field-unit">lbs</span>
         </div>
+        <div style="font-size:10px;color:var(--accent-blue);padding:0 0 6px 0" id="kg-bew">= ${(bew.defaultWeight*0.4536).toFixed(0)} kg</div>
         <div class="wb-row-3">
           <label class="wb-field-label">Brazo vacío (desde mástil)</label>
           <input type="number" id="wb-bew-arm" value="${bew.defaultArm}" min="-10" max="10" step="0.1">
@@ -138,6 +139,7 @@ const WBModule = {
     const elL   = document.getElementById('wb-fuel-l');
     if (elGal) elGal.value = gal.toFixed(1);
     if (elL)   elL.value   = (gal * 3.78541).toFixed(0);
+    this._liveUpdate();
   },
 
   _showKg(inputId, spanId) {
@@ -184,7 +186,7 @@ const WBModule = {
     // Check limits
     const limits = WB_DATA.limits;
     const weightOK = totalWeight <= limits.maxGrossWeight;
-    const cgFwd    = totalWeight >= 2000 ? limits.fwdCGLimitMTOW : limits.fwdCGLimit;
+    const cgFwd    = totalWeight >= 2250 ? limits.fwdCGLimitMTOW : limits.fwdCGLimit;
     const cgOK     = cgArm >= cgFwd && cgArm <= limits.aftCGLimit;
     const bagOK    = bag <= limits.maxBaggage;
     const overallOK = weightOK && cgOK && bagOK;

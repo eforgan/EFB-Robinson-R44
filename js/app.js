@@ -27,7 +27,7 @@ const App = {
 
     this._startPhotoRotator();
 
-    console.log('EFB Robinson R44 II v3.0 — Iniciado correctamente');
+    console.log('EFB Robinson R44 II v4.0 — Iniciado correctamente');
   },
 
   /* ─── Toggle de tema oscuro/claro ─── */

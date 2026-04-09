@@ -3,7 +3,7 @@
    Cachea todos los archivos para uso offline completo
    ══════════════════════════════════════════════════════════════ */
 
-const CACHE_NAME = 'efb-r44-v4';
+const CACHE_NAME = 'efb-r44-v6';
 
 const ASSETS = [
   '/EFB-Robinson-R44/',

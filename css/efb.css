@@ -220,16 +220,17 @@ a { color: var(--accent-blue); text-decoration: none; }
 }
 /* Logo MODENA CEAC en header */
 .header-logo {
-  height: 28px;
+  height: 32px;
   width: auto;
   object-fit: contain;
   margin-right: 12px;
-  opacity: 0.95;
-  filter: drop-shadow(0 1px 4px rgba(0,0,0,0.4));
   flex-shrink: 0;
+  /* Modo oscuro: convierte a blanco para que el texto sea legible */
+  filter: brightness(0) invert(1) drop-shadow(0 1px 3px rgba(245,166,35,0.5));
 }
 body.light-mode .header-logo {
-  filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+  /* Modo claro: logo original con leve sombra */
+  filter: drop-shadow(0 1px 4px rgba(0,0,0,0.25));
 }
 
 .btn-theme {
@@ -391,6 +392,23 @@ body.light-mode .header-logo {
   overflow: hidden;
   border: 1px solid var(--border-bright);
   box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  /* Fallback cuando las fotos no cargan */
+  background: linear-gradient(135deg, #0a1828 0%, #0d2040 50%, #091628 100%);
+}
+/* Texto fallback centrado cuando no hay fotos */
+.r44-photo-gallery::after {
+  content: '🚁  Robinson R44 II';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: rgba(245,166,35,0.6);
+  font-weight: 700;
+  letter-spacing: 1px;
+  pointer-events: none;
+  z-index: 0;
 }
 .r44-photo {
   position: absolute;
@@ -400,6 +418,7 @@ body.light-mode .header-logo {
   object-fit: cover;
   opacity: 0;
   transition: opacity 1s ease;
+  z-index: 1;
 }
 .r44-photo.r44-photo-active {
   opacity: 1;
@@ -478,9 +497,13 @@ body.light-mode .header-logo {
   opacity: 1;
 }
 .module-card.emergency-card:hover {
-  border-color: var(--accent-red);
+  animation-play-state: paused;
+  border-color: var(--accent-red) !important;
   box-shadow: 0 8px 28px rgba(255,61,80,0.25), 0 0 0 1px rgba(255,61,80,0.2);
   background: linear-gradient(160deg, rgba(255,61,80,0.1) 0%, var(--bg-card) 100%);
+}
+.module-card.emergency-card:hover .module-icon {
+  animation-play-state: paused;
 }
 .module-icon {
   font-size: 28px;
@@ -788,6 +811,132 @@ body.light-mode .header-logo {
 .perf-tab.tab-danger.active::after {
   background: var(--accent-red) !important;
   box-shadow: 0 0 8px rgba(255,61,80,0.5) !important;
+}
+.perf-tab.tab-told { color: rgba(0,212,161,0.7) !important; }
+.perf-tab.tab-told:hover { color: var(--accent-green) !important; }
+.perf-tab.tab-told.active {
+  color: var(--accent-green) !important;
+  background: rgba(0,212,161,0.06) !important;
+}
+.perf-tab.tab-told.active::after {
+  background: var(--accent-green) !important;
+  box-shadow: 0 0 8px rgba(0,212,161,0.5) !important;
+}
+
+/* ─── New modules: timer, units, VRS, route ─── */
+.timer-display {
+  font-family: monospace;
+  font-size: 52px;
+  font-weight: 700;
+  color: var(--accent-amber);
+  text-align: center;
+  letter-spacing: 4px;
+  text-shadow: 0 0 20px rgba(245,166,35,0.5);
+  padding: 16px 0;
+}
+.timer-btn-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 8px;
+}
+.converter-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.converter-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+}
+.converter-card h4 {
+  font-size: 12px;
+  color: var(--accent-amber);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0 0 10px;
+}
+.conv-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+.conv-input {
+  width: 90px;
+  padding: 6px 8px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-bright);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: 13px;
+  text-align: right;
+}
+.conv-label {
+  min-width: 44px;
+  color: var(--text-muted);
+  font-size: 11px;
+}
+.conv-arrow {
+  color: var(--accent-amber);
+  font-weight: 700;
+}
+.conv-result {
+  min-width: 90px;
+  text-align: right;
+  font-weight: 700;
+  color: var(--accent-green);
+  font-family: monospace;
+  font-size: 14px;
+}
+.told-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+.told-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.told-section {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+}
+.told-section h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--accent-amber);
+  margin: 0 0 8px;
+}
+.told-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 3px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+}
+.told-row:last-child { border-bottom: none; }
+.told-label { color: var(--text-muted); }
+.told-val { font-weight: 700; color: var(--text-primary); font-family: monospace; }
+.told-val.ok { color: var(--accent-green); }
+.told-val.warn { color: var(--accent-orange); }
+.told-val.nok { color: var(--accent-red); }
+.vrs-layout { display: grid; grid-template-columns: 280px 1fr; gap: 14px; height: 100%; }
+.route-layout { display: grid; grid-template-columns: 300px 1fr; gap: 14px; }
+@media (max-width: 768px) {
+  .converter-grid { grid-template-columns: 1fr; }
+  .told-grid { grid-template-columns: 1fr; }
+  .vrs-layout { grid-template-columns: 1fr; }
+  .route-layout { grid-template-columns: 1fr; }
 }
 
 /* ─── H-V Curve ─── */
@@ -1664,6 +1813,192 @@ body.light-mode .header-logo {
   .r44-silhouette { height: 70px; flex: 0 0 200px; }
   .module-card { padding: 12px 8px; }
   .module-icon { font-size: 22px; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   ANIMACIONES & EFECTOS VISUALES
+══════════════════════════════════════════════════════════════ */
+
+/* ─── Keyframes ─── */
+@keyframes rainbow-sweep {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+@keyframes fade-slide-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%       { transform: translateY(-9px) scale(1.04); }
+}
+@keyframes clock-glow {
+  0%, 100% { text-shadow: 0 0 12px rgba(0,229,176,0.4); }
+  50%       { text-shadow: 0 0 26px rgba(0,229,176,0.9), 0 0 50px rgba(0,229,176,0.25); }
+}
+@keyframes indicator-glow {
+  0%, 100% { box-shadow: 0 0 8px rgba(245,166,35,0.7); }
+  50%       { box-shadow: 0 0 18px rgba(245,166,35,1), 0 3px 14px rgba(245,166,35,0.45); }
+}
+@keyframes shimmer-sweep {
+  0%   { transform: translateX(-150%); }
+  100% { transform: translateX(300%); }
+}
+@keyframes hero-bg-pulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.5); }
+}
+@keyframes emergency-label-breathe {
+  0%, 100% { opacity: 0.7; text-shadow: 0 0 8px rgba(255,61,80,0.3); }
+  50%       { opacity: 1;   text-shadow: 0 0 16px rgba(255,61,80,0.8), 0 0 32px rgba(255,61,80,0.25); }
+}
+@keyframes emergency-icon-pulse {
+  0%, 100% { transform: scale(1);    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4)); }
+  50%       { transform: scale(1.15); filter: drop-shadow(0 3px 14px rgba(255,61,80,0.7)); }
+}
+@keyframes check-pop {
+  0%   { transform: scale(0.65); }
+  60%  { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
+@keyframes scan-line {
+  0%   { top: -4px; opacity: 0; }
+  8%   { opacity: 0.6; }
+  92%  { opacity: 0.6; }
+  100% { top: calc(100% + 4px); opacity: 0; }
+}
+@keyframes border-glow-pulse {
+  0%, 100% { border-color: rgba(255,61,80,0.35); }
+  50%       { border-color: rgba(255,61,80,0.75); }
+}
+
+/* ─── Header rainbow line animada ─── */
+#efb-header::after {
+  background: linear-gradient(90deg,
+    transparent 0%,
+    #f5a623 10%, #ffc760 22%,
+    #4a9eff 38%,
+    #8b5cf6 54%,
+    #00e5b0 70%,
+    #f5a623 86%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: rainbow-sweep 5s linear infinite;
+  opacity: 0.9;
+}
+
+/* ─── UTC Clock glow vivo ─── */
+.utc-clock { animation: clock-glow 2.5s ease-in-out infinite; }
+
+/* ─── Entrada de pantallas ─── */
+.screen.active {
+  animation: fade-slide-up 0.32s cubic-bezier(0.4,0,0.2,1) both;
+}
+
+/* ─── Module cards stagger en home ─── */
+.home-grid .module-card:nth-child(1) { animation: fade-slide-up 0.4s 0.04s cubic-bezier(0.4,0,0.2,1) both; }
+.home-grid .module-card:nth-child(2) { animation: fade-slide-up 0.4s 0.10s cubic-bezier(0.4,0,0.2,1) both; }
+.home-grid .module-card:nth-child(3) { animation: fade-slide-up 0.4s 0.16s cubic-bezier(0.4,0,0.2,1) both; }
+.home-grid .module-card:nth-child(4) { animation: fade-slide-up 0.4s 0.22s cubic-bezier(0.4,0,0.2,1) both; }
+.home-grid .module-card:nth-child(5) { animation: fade-slide-up 0.4s 0.28s cubic-bezier(0.4,0,0.2,1) both; }
+
+/* ─── Emergency card — entrada + borde pulsa + ícono late ─── */
+/* Especificidad 0,3,0 igual a nth-child, pero va después en cascada → gana */
+.home-grid .module-card.emergency-card {
+  animation: fade-slide-up 0.4s 0.04s cubic-bezier(0.4,0,0.2,1) both,
+             border-glow-pulse 2.4s ease-in-out 0.48s infinite;
+}
+.emergency-card .module-icon {
+  animation: emergency-icon-pulse 1.8s ease-in-out infinite;
+}
+
+/* ─── Placeholder icon flota ─── */
+.placeholder-icon { animation: float 3.5s ease-in-out infinite; }
+
+/* ─── Nav indicator glow pulsante ─── */
+.nav-btn.active .nav-indicator {
+  animation: indicator-glow 2s ease-in-out infinite;
+}
+
+/* ─── Module card shimmer en hover ─── */
+.module-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg,
+    transparent 38%,
+    rgba(255,255,255,0.07) 50%,
+    transparent 62%
+  );
+  transform: translateX(-150%);
+  pointer-events: none;
+  z-index: 2;
+  transition: none;
+}
+.module-card:hover::after {
+  animation: shimmer-sweep 0.65s ease-out forwards;
+}
+
+/* ─── Hero background blob pulsante ─── */
+.home-hero::before {
+  animation: hero-bg-pulse 7s ease-in-out infinite;
+}
+
+/* ─── Emergency section label respira ─── */
+.emergency-label {
+  animation: emergency-label-breathe 2.4s ease-in-out infinite;
+}
+
+/* ─── Checklist checkbox pop al marcar ─── */
+.cl-item.checked .cl-checkbox {
+  animation: check-pop 0.28s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+
+/* ─── Scan line sobre la galería de fotos ─── */
+.r44-photo-gallery::before {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 3px;
+  top: -4px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(74,158,255,0.5) 40%,
+    rgba(0,229,176,0.5) 60%,
+    transparent 100%
+  );
+  animation: scan-line 5s ease-in-out infinite 1.5s;
+  z-index: 4;
+  pointer-events: none;
+}
+
+/* ─── Btn-primary shine en hover ─── */
+.btn-primary { position: relative; overflow: hidden; }
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg,
+    transparent 38%,
+    rgba(255,255,255,0.18) 50%,
+    transparent 62%
+  );
+  transform: translateX(-150%);
+  pointer-events: none;
+  transition: none;
+}
+.btn-primary:hover::after {
+  animation: shimmer-sweep 0.5s ease-out forwards;
+}
+
+/* ─── Accesibilidad: respeta preferencia de movimiento reducido ─── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* ══════════════════════════════════════════════════════════════
