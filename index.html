@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>EFB Robinson R44 II</title>
+  <link rel="stylesheet" href="css/efb.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- ═══════════════ HEADER ═══════════════ -->
+  <header id="efb-header">
+    <div class="header-left">
+      <button id="btn-back" class="btn-icon hidden" onclick="App.goBack()">
+        <svg viewBox="0 0 24 24" width="22" height="22"><path d="M19 12H5M12 5l-7 7 7 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+      </button>
+      <div id="header-info">
+        <span id="header-title">Robinson R44 II</span>
+        <span id="header-subtitle">Electronic Flight Bag</span>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="header-meta">
+        <span id="utc-clock" class="utc-clock">00:00 UTC</span>
+        <button id="btn-theme" class="btn-theme" onclick="App.toggleTheme()" title="Modo claro / oscuro">
+          <span id="theme-icon">☀️</span>
+        </button>
+        <span class="badge-version">v2.1</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════ MAIN CONTENT ═══════════════ -->
+  <main id="efb-main">
+
+    <!-- ─── HOME ─── -->
+    <section id="screen-home" class="screen active">
+      <div class="home-hero">
+        <!-- Imagen real del Robinson R44 II (Wikimedia Commons, CC BY-SA) -->
+        <img id="r44-photo" class="r44-photo"
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Robinson_R44_raven_II.jpg/640px-Robinson_R44_raven_II.jpg"
+          alt="Robinson R44 II Raven"
+          onerror="PerfModule._imgFallback(this)">
+        <!-- SVG fallback si la imagen no carga -->
+        <svg id="r44-svg-fallback" class="r44-silhouette" style="display:none" viewBox="0 0 360 140" xmlns="http://www.w3.org/2000/svg">
+          <line x1="20" y1="32" x2="220" y2="32" stroke="#f5a623" stroke-width="4" stroke-linecap="round"/>
+          <ellipse cx="120" cy="32" rx="6" ry="6" fill="#f5a623"/>
+          <rect x="117" y="32" width="6" height="18" fill="#8b9ab8"/>
+          <ellipse cx="105" cy="72" rx="48" ry="28" fill="#1a2440" stroke="#4a9eff" stroke-width="1.5"/>
+          <path d="M70 68 Q120 50 160 70 L210 76 Q230 78 240 82 L150 90 Q100 95 60 88 Z" fill="#1a2440" stroke="#4a9eff" stroke-width="1.5"/>
+          <path d="M210 76 L320 62 Q330 61 332 64 L220 80 Z" fill="#141d35" stroke="#4a9eff" stroke-width="1.5"/>
+          <ellipse cx="330" cy="63" rx="4" ry="4" fill="#f5a623"/>
+          <line x1="330" y1="45" x2="330" y2="81" stroke="#f5a623" stroke-width="3" stroke-linecap="round"/>
+          <line x1="72" y1="100" x2="155" y2="100" stroke="#8b9ab8" stroke-width="3" stroke-linecap="round"/>
+          <line x1="80" y1="88" x2="80" y2="100" stroke="#8b9ab8" stroke-width="2.5"/>
+          <line x1="145" y1="88" x2="145" y2="100" stroke="#8b9ab8" stroke-width="2.5"/>
+          <ellipse cx="88" cy="70" rx="20" ry="15" fill="#0a1520" stroke="#4a9eff" stroke-width="1" opacity="0.8"/>
+          <ellipse cx="125" cy="68" rx="18" ry="14" fill="#0a1520" stroke="#4a9eff" stroke-width="1" opacity="0.8"/>
+          <text x="100" y="120" font-family="monospace" font-size="11" fill="#8b9ab8">Robinson R44 II</text>
+        </svg>
+        <div class="home-specs">
+          <div class="spec-item"><span class="spec-label">Motor</span><span class="spec-val">Lycoming IO-540</span></div>
+          <div class="spec-item"><span class="spec-label">Potencia</span><span class="spec-val">245 HP</span></div>
+          <div class="spec-item"><span class="spec-label">MTOW</span><span class="spec-val">2500 lbs / 1134 kg</span></div>
+          <div class="spec-item"><span class="spec-label">Combustible</span><span class="spec-val">29.5 gal / 111.6 L</span></div>
+          <div class="spec-item"><span class="spec-label">Vne</span><span class="spec-val">120 KIAS</span></div>
+          <div class="spec-item"><span class="spec-label">Autonomía</span><span class="spec-val">~3 hr / ~340 nm</span></div>
+        </div>
+      </div>
+
+      <div class="home-grid">
+        <div class="module-card emergency-card" onclick="App.navigate('checklists','emergency')">
+          <div class="module-icon">🚨</div>
+          <div class="module-name">EMERGENCIAS</div>
+          <div class="module-desc">Acceso rápido</div>
+        </div>
+        <div class="module-card" onclick="App.navigate('checklists')">
+          <div class="module-icon">✅</div>
+          <div class="module-name">CHECKLISTS</div>
+          <div class="module-desc">12 listas normales + emergencias</div>
+        </div>
+        <div class="module-card" onclick="App.navigate('performance')">
+          <div class="module-icon">📊</div>
+          <div class="module-name">PERFORMANCE</div>
+          <div class="module-desc">Tablas y calculadoras</div>
+        </div>
+        <div class="module-card" onclick="App.navigate('wb')">
+          <div class="module-icon">⚖️</div>
+          <div class="module-name">PESO Y BALANCE</div>
+          <div class="module-desc">Calculadora + gráfico CG</div>
+        </div>
+        <div class="module-card" onclick="App.navigate('course')">
+          <div class="module-icon">📚</div>
+          <div class="module-name">CURSO ADAPTACIÓN</div>
+          <div class="module-desc">18 temas + referencias</div>
+        </div>
+        <div class="module-card" onclick="App.navigate('manual')">
+          <div class="module-icon">📄</div>
+          <div class="module-name">MANUAL POH</div>
+          <div class="module-desc">R44 II Flight Manual</div>
+        </div>
+      </div>
+
+      <div class="disclaimer">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f5a623" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span>SOLO REFERENCIA — Para operación real siempre consultar el POH oficial aprobado del helicóptero específico</span>
+      </div>
+    </section>
+
+    <!-- ─── CHECKLISTS ─── -->
+    <section id="screen-checklists" class="screen">
+      <div class="two-panel">
+        <div class="panel-left" id="cl-list-panel">
+          <div class="panel-header">LISTAS DE VERIFICACIÓN</div>
+          <div class="cl-category">
+            <div class="cl-cat-label">PROCEDIMIENTOS NORMALES</div>
+            <div id="cl-normal-buttons"></div>
+          </div>
+          <div class="cl-category">
+            <div class="cl-cat-label emergency-label">PROCEDIMIENTOS DE EMERGENCIA</div>
+            <div id="cl-emergency-buttons"></div>
+          </div>
+        </div>
+        <div class="panel-right" id="cl-content-panel">
+          <div class="checklist-placeholder">
+            <div class="placeholder-icon">✅</div>
+            <p>Seleccione una lista de verificación</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── PERFORMANCE ─── -->
+    <section id="screen-performance" class="screen">
+      <div class="perf-tabs-wrap">
+        <div class="perf-tabs">
+          <button class="perf-tab active" data-tab="da">Densidad Alt.</button>
+          <button class="perf-tab" data-tab="hover">Hover</button>
+          <button class="perf-tab" data-tab="climb">Ascenso</button>
+          <button class="perf-tab" data-tab="cruise">Crucero</button>
+          <button class="perf-tab" data-tab="fuel">Combustible</button>
+          <button class="perf-tab" data-tab="autorot">Autorrotación</button>
+          <button class="perf-tab tab-danger" data-tab="hv">Curva H-V</button>
+        </div>
+      </div>
+      <div id="perf-content" class="perf-content"></div>
+    </section>
+
+    <!-- ─── WEIGHT & BALANCE ─── -->
+    <section id="screen-wb" class="screen">
+      <div class="wb-layout">
+        <div class="wb-inputs-panel">
+          <div class="panel-header">DATOS DE CARGA</div>
+          <div id="wb-form"></div>
+          <div class="wb-actions">
+            <button class="btn-primary" onclick="WBModule.calculate()">CALCULAR</button>
+            <button class="btn-secondary" onclick="WBModule.reset()">LIMPIAR</button>
+            <button class="btn-secondary" onclick="WBModule.printReport()">IMPRIMIR</button>
+          </div>
+          <div id="wb-results" class="wb-results hidden"></div>
+        </div>
+        <div class="wb-chart-panel">
+          <div class="panel-header">DIAGRAMA PESO Y BALANCE</div>
+          <div class="canvas-container">
+            <canvas id="wb-canvas"></canvas>
+          </div>
+          <div class="wb-legend">
+            <span class="legend-ok">■ Dentro de límites</span>
+            <span class="legend-warn">■ Fuera de límites</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── COURSE ─── -->
+    <section id="screen-course" class="screen">
+      <div class="two-panel">
+        <div class="panel-left" id="course-menu-panel">
+          <div class="panel-header">TEMARIO — CURSO ADAPTACIÓN R44 II</div>
+          <div id="course-topic-list"></div>
+        </div>
+        <div class="panel-right" id="course-content-panel">
+          <div class="checklist-placeholder">
+            <div class="placeholder-icon">📚</div>
+            <p>Seleccione un tema del temario</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── MANUAL ─── -->
+    <section id="screen-manual" class="screen">
+      <div class="two-panel">
+        <div class="panel-left" id="manual-index-panel">
+          <div class="panel-header">ÍNDICE — R44 II POH</div>
+          <div id="manual-sections"></div>
+        </div>
+        <div class="panel-right" id="manual-view-panel">
+          <div id="manual-viewer">
+            <div class="checklist-placeholder">
+              <div class="placeholder-icon">📄</div>
+              <p>Seleccione una sección del manual</p>
+              <button class="btn-primary" style="margin-top:16px" onclick="ManualModule.openFull()">Abrir PDF completo</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════ BOTTOM NAV ═══════════════ -->
+  <nav id="efb-nav">
+    <button class="nav-btn active" data-screen="home" onclick="App.navigate('home')">
+      <div class="nav-indicator"></div>
+      <span class="nav-icon">🏠</span>
+      <span class="nav-label">Inicio</span>
+    </button>
+    <button class="nav-btn" data-screen="checklists" onclick="App.navigate('checklists')">
+      <div class="nav-indicator"></div>
+      <span class="nav-icon">✅</span>
+      <span class="nav-label">Checklists</span>
+    </button>
+    <button class="nav-btn" data-screen="performance" onclick="App.navigate('performance')">
+      <div class="nav-indicator"></div>
+      <span class="nav-icon">📊</span>
+      <span class="nav-label">Performance</span>
+    </button>
+    <button class="nav-btn" data-screen="wb" onclick="App.navigate('wb')">
+      <div class="nav-indicator"></div>
+      <span class="nav-icon">⚖️</span>
+      <span class="nav-label">Peso/Bal.</span>
+    </button>
+    <button class="nav-btn" data-screen="course" onclick="App.navigate('course')">
+      <div class="nav-indicator"></div>
+      <span class="nav-icon">📚</span>
+      <span class="nav-label">Curso</span>
+    </button>
+    <button class="nav-btn" data-screen="manual" onclick="App.navigate('manual')">
+      <div class="nav-indicator"></div>
+      <span class="nav-icon">📄</span>
+      <span class="nav-label">Manual</span>
+    </button>
+  </nav>
+
+</div>
+
+<!-- DATA -->
+<script src="js/data/checklists.js"></script>
+<script src="js/data/performance.js"></script>
+<script src="js/data/wb.js"></script>
+<script src="js/data/course.js"></script>
+<!-- MODULES -->
+<script src="js/modules/checklists.js"></script>
+<script src="js/modules/perf.js"></script>
+<script src="js/modules/wb.js"></script>
+<script src="js/modules/course.js"></script>
+<!-- APP CONTROLLER -->
+<script src="js/app.js"></script>
+</body>
+</html>
