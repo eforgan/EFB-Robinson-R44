@@ -26,12 +26,12 @@
       </div>
     </div>
     <div class="header-right">
+      <img src="images/logo-modena.png" alt="MODENA CEAC" class="header-logo">
       <div class="header-meta">
         <span id="utc-clock" class="utc-clock">00:00 UTC</span>
         <button id="btn-theme" class="btn-theme" onclick="App.toggleTheme()" title="Modo claro / oscuro">
           <span id="theme-icon">☀️</span>
         </button>
-        <span class="badge-version">v2.1</span>
       </div>
     </div>
   </header>
@@ -43,27 +43,20 @@
     <section id="screen-home" class="screen active">
       <div class="home-hero">
         <!-- Imagen real del Robinson R44 II (Wikimedia Commons, CC BY-SA) -->
-        <img id="r44-photo" class="r44-photo"
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Robinson_R44_raven_II.jpg/640px-Robinson_R44_raven_II.jpg"
-          alt="Robinson R44 II Raven"
-          onerror="PerfModule._imgFallback(this)">
-        <!-- SVG fallback si la imagen no carga -->
-        <svg id="r44-svg-fallback" class="r44-silhouette" style="display:none" viewBox="0 0 360 140" xmlns="http://www.w3.org/2000/svg">
-          <line x1="20" y1="32" x2="220" y2="32" stroke="#f5a623" stroke-width="4" stroke-linecap="round"/>
-          <ellipse cx="120" cy="32" rx="6" ry="6" fill="#f5a623"/>
-          <rect x="117" y="32" width="6" height="18" fill="#8b9ab8"/>
-          <ellipse cx="105" cy="72" rx="48" ry="28" fill="#1a2440" stroke="#4a9eff" stroke-width="1.5"/>
-          <path d="M70 68 Q120 50 160 70 L210 76 Q230 78 240 82 L150 90 Q100 95 60 88 Z" fill="#1a2440" stroke="#4a9eff" stroke-width="1.5"/>
-          <path d="M210 76 L320 62 Q330 61 332 64 L220 80 Z" fill="#141d35" stroke="#4a9eff" stroke-width="1.5"/>
-          <ellipse cx="330" cy="63" rx="4" ry="4" fill="#f5a623"/>
-          <line x1="330" y1="45" x2="330" y2="81" stroke="#f5a623" stroke-width="3" stroke-linecap="round"/>
-          <line x1="72" y1="100" x2="155" y2="100" stroke="#8b9ab8" stroke-width="3" stroke-linecap="round"/>
-          <line x1="80" y1="88" x2="80" y2="100" stroke="#8b9ab8" stroke-width="2.5"/>
-          <line x1="145" y1="88" x2="145" y2="100" stroke="#8b9ab8" stroke-width="2.5"/>
-          <ellipse cx="88" cy="70" rx="20" ry="15" fill="#0a1520" stroke="#4a9eff" stroke-width="1" opacity="0.8"/>
-          <ellipse cx="125" cy="68" rx="18" ry="14" fill="#0a1520" stroke="#4a9eff" stroke-width="1" opacity="0.8"/>
-          <text x="100" y="120" font-family="monospace" font-size="11" fill="#8b9ab8">Robinson R44 II</text>
-        </svg>
+        <div class="r44-photo-gallery">
+          <img class="r44-photo r44-photo-active"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Robinson_R44_raven_II.jpg/640px-Robinson_R44_raven_II.jpg"
+            alt="Robinson R44 II Raven II"
+            onerror="this.style.display='none'">
+          <img class="r44-photo"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/N9097P_Robinson_R44_Raven_II_%28cropped%29.jpg/640px-N9097P_Robinson_R44_Raven_II_%28cropped%29.jpg"
+            alt="Robinson R44 II en vuelo"
+            onerror="this.style.display='none'">
+          <img class="r44-photo"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Robinson_R44_Raven_II_cockpit.jpg/640px-Robinson_R44_Raven_II_cockpit.jpg"
+            alt="Cabina Robinson R44 II"
+            onerror="this.style.display='none'">
+        </div>
         <div class="home-specs">
           <div class="spec-item"><span class="spec-label">Motor</span><span class="spec-val">Lycoming IO-540</span></div>
           <div class="spec-item"><span class="spec-label">Potencia</span><span class="spec-val">245 HP</span></div>

@@ -25,7 +25,9 @@ const App = {
     // Manejar orientación y resize
     window.addEventListener('resize', () => this._handleResize());
 
-    console.log('EFB Robinson R44 II v2.1 — Iniciado correctamente');
+    this._startPhotoRotator();
+
+    console.log('EFB Robinson R44 II v3.0 — Iniciado correctamente');
   },
 
   /* ─── Toggle de tema oscuro/claro ─── */
@@ -139,6 +141,24 @@ const App = {
     };
     update();
     setInterval(update, 1000);
+  },
+
+  /* ─── Rotador automático de fotos R44 ─── */
+  _startPhotoRotator() {
+    const photos = document.querySelectorAll('.r44-photo');
+    if (photos.length < 2) return;
+    let current = 0;
+    setInterval(() => {
+      photos[current].classList.remove('r44-photo-active');
+      current = (current + 1) % photos.length;
+      // Saltar fotos que no cargaron (display:none)
+      let attempts = 0;
+      while (photos[current].style.display === 'none' && attempts < photos.length) {
+        current = (current + 1) % photos.length;
+        attempts++;
+      }
+      photos[current].classList.add('r44-photo-active');
+    }, 4000);
   },
 
   /* ─── Resize handler ─── */
