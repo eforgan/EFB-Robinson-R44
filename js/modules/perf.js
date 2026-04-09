@@ -191,7 +191,7 @@ const PerfModule = {
 
       return `
         <div class="perf-section-title">🚁 ${label}</div>
-        <div class="perf-note">${data.note}</div>
+        <div class="perf-note">${data.note} &nbsp;|&nbsp; Valores en % potencia máx. continua (referencia MAP: IO-540 a 2550 RPM, máx 25.5 inHg al nivel del mar)</div>
         <div class="perf-table-wrapper">
           <table class="perf-table">
             <thead><tr>
@@ -277,18 +277,35 @@ const PerfModule = {
     const statusColor = p => p > 100 ? '#ff4455' : p > 95 ? '#ff7a30' : '#00d4a1';
     const statusText  = p => p > 100 ? 'NO POSIBLE 🔴' : p > 95 ? 'MARGINAL ⚠️' : 'POSIBLE ✓';
 
+    // Conversión % potencia → presión de manifold (inHg)
+    // IO-540-AE1A5 a 2550 RPM: MAP máx continua ≈ 25.5 inHg a nivel del mar
+    // A mayor altitud, la presión ambiente baja: ratio = (1 - DA/145442)^5.256
+    const pressureRatio = Math.pow(Math.max(0.1, 1 - da / 145442), 5.256);
+    const maxMAP = 25.5 * pressureRatio;  // MAP máx disponible a esta DA
+    const pctToMAP = p => ((p / 100) * maxMAP).toFixed(1);
+
+    const boxHTML = (label, pct) => pct ? `
+      <div class="result-box">
+        <div class="result-label">${label}</div>
+        <div class="result-value" style="color:${statusColor(pct)};font-size:28px">${pct.toFixed(1)}%</div>
+        <div style="margin-top:4px">
+          <span style="font-family:monospace;font-size:18px;font-weight:700;color:var(--accent-blue)">
+            ${pctToMAP(pct)} inHg
+          </span>
+        </div>
+        <div style="font-size:10px;color:var(--text-muted);margin-top:2px">MAP manifold pressure</div>
+        <div class="result-unit" style="color:${statusColor(pct)};margin-top:6px">${statusText(pct)}</div>
+      </div>
+    ` : `<div class="result-box"><div class="result-label">${label}</div><div class="result-value">--</div></div>`;
+
     result.innerHTML = `
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-        <div class="result-box">
-          <div class="result-label">OGE Power Required</div>
-          <div class="result-value" style="color:${statusColor(ogeP)}">${ogeP ? ogeP.toFixed(1)+'%' : '--'}</div>
-          <div class="result-unit" style="color:${statusColor(ogeP)}">${ogeP ? statusText(ogeP) : ''}</div>
-        </div>
-        <div class="result-box">
-          <div class="result-label">IGE Power Required (~3 ft)</div>
-          <div class="result-value" style="color:${statusColor(igeP)}">${igeP ? igeP.toFixed(1)+'%' : '--'}</div>
-          <div class="result-unit" style="color:${statusColor(igeP)}">${igeP ? statusText(igeP) : ''}</div>
-        </div>
+        ${boxHTML('OGE Power Required', ogeP)}
+        ${boxHTML('IGE Power Required (~3 ft)', igeP)}
+      </div>
+      <div style="font-size:10px;color:var(--text-muted);margin-top:8px;padding:6px 8px;background:rgba(255,255,255,0.03);border-radius:6px;border-left:2px solid var(--border-bright)">
+        MAP calculado para IO-540-AE1A5 a 2550 RPM — MAP máx a ${da.toLocaleString()} ft DA: ${maxMAP.toFixed(1)} inHg
+        &nbsp;|&nbsp; Verificar siempre con instrumentos reales
       </div>
     `;
   },
