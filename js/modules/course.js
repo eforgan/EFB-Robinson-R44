@@ -193,19 +193,21 @@ const ManualModule = {
         <div class="manual-section-header" style="font-size:14px;margin-bottom:8px">Acceso rápido por página</div>
         <div class="manual-page-links">${pageLinksHTML}</div>
 
-        <div class="manual-embed-area" id="manual-embed">
-          <iframe src="docs/R442FM.pdf#page=${s.pages[0]}" id="pdf-iframe"
-            title="Robinson R44 II POH"
-            allow="fullscreen">
-            <p style="padding:20px;color:#666">
-              Su navegador no puede mostrar PDF en línea.<br>
-              <a href="docs/R442FM.pdf" target="_blank">Abrir PDF directamente</a>
-            </p>
-          </iframe>
-        </div>
-        <div style="font-size:11px;color:var(--text-muted);margin-top:8px">
-          Si el PDF no se muestra: haga clic en "Abrir PDF completo" o use el botón de página específica.<br>
-          En algunas configuraciones de seguridad del navegador, los PDF locales requieren apertura directa.
+        <div style="background:rgba(74,158,255,0.06);border:1px solid rgba(74,158,255,0.25);border-radius:12px;padding:24px;text-align:center;margin-top:8px">
+          <div style="font-size:32px;margin-bottom:12px">📄</div>
+          <div style="font-size:15px;font-weight:700;color:var(--text-primary);margin-bottom:6px">
+            Sección ${num} — ${s.title}
+          </div>
+          <div style="font-size:12px;color:var(--text-secondary);margin-bottom:20px">
+            Páginas ${s.pages[0]}–${s.pages[1]} del POH Robinson R44 II
+          </div>
+          <button class="btn-primary" style="font-size:15px;padding:14px 28px;margin-bottom:10px"
+            onclick="window.open('docs/R442FM.pdf#page=${s.pages[0]}','_blank')">
+            📖 Abrir Sección en Visor PDF
+          </button>
+          <div style="font-size:11px;color:var(--text-muted);margin-top:12px">
+            Se abrirá en una nueva pestaña del navegador
+          </div>
         </div>
       </div>
     `;
