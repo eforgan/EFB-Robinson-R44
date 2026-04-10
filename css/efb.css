@@ -220,18 +220,37 @@ a { color: var(--accent-blue); text-decoration: none; }
 }
 /* Logo MODENA CEAC en header */
 .header-logo {
-  height: 32px;
-  width: auto;
-  object-fit: contain;
+  display: flex;
+  align-items: center;
   margin-right: 12px;
   flex-shrink: 0;
-  /* Modo oscuro: convierte a blanco para que el texto sea legible */
-  filter: brightness(0) invert(1) drop-shadow(0 1px 3px rgba(245,166,35,0.5));
+  line-height: 1;
+  gap: 0;
 }
-body.light-mode .header-logo {
-  /* Modo claro: logo original con leve sombra */
-  filter: drop-shadow(0 1px 4px rgba(0,0,0,0.25));
+.logo-modena {
+  font-family: 'Arial Black', 'Arial', sans-serif;
+  font-size: 18px;
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
+.logo-modena-red {
+  color: #e02020;
+}
+.logo-ceac {
+  font-family: 'Arial', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  background: #6b6b6b;
+  padding: 1px 5px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-left: 2px;
+}
+body.light-mode .logo-modena { color: #1a1a1a; }
+body.light-mode .logo-ceac   { color: #ffffff; background: #555; }
 
 .btn-theme {
   width: 34px;
