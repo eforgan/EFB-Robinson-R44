@@ -166,8 +166,15 @@ const WBModule = {
     const fuel   = this._getVal('wb-fuel');
     const bag    = this._getVal('wb-baggage');
 
-    // Find arms from data
-    const getArm = id => WB_DATA.stations.find(s => s.id === id)?.arm || 0;
+    // Find arms from data — avisa si una estación no está en los datos
+    const getArm = id => {
+      const station = WB_DATA.stations.find(s => s.id === id);
+      if (!station) { console.warn(`WB: estación "${id}" no encontrada en WB_DATA`); return 0; }
+      return station.arm;
+    };
+
+    // Umbral de peso para límite CG delantero (lbs) — ver POH sección 6
+    const CG_FWD_HEAVY_THRESHOLD = 2250;
 
     const items = [
       { label: 'Peso Vacío',    weight: bew,    arm: bewArm },
@@ -186,7 +193,7 @@ const WBModule = {
     // Check limits
     const limits = WB_DATA.limits;
     const weightOK = totalWeight <= limits.maxGrossWeight;
-    const cgFwd    = totalWeight >= 2250 ? limits.fwdCGLimitMTOW : limits.fwdCGLimit;
+    const cgFwd    = totalWeight >= CG_FWD_HEAVY_THRESHOLD ? limits.fwdCGLimitMTOW : limits.fwdCGLimit;
     const cgOK     = cgArm >= cgFwd && cgArm <= limits.aftCGLimit;
     const bagOK    = bag <= limits.maxBaggage;
     const overallOK = weightOK && cgOK && bagOK;
@@ -197,7 +204,7 @@ const WBModule = {
     const resDiv = document.getElementById('wb-results');
     resDiv.classList.remove('hidden');
 
-    const fmt = (v, dec=1) => parseFloat(v.toFixed(dec)).toLocaleString('es-AR');
+    const fmt = (v, dec=1) => v.toLocaleString(undefined, { minimumFractionDigits: dec, maximumFractionDigits: dec });
 
     resDiv.innerHTML = `
       <div style="font-size:12px;font-weight:700;color:var(--accent-amber);margin-bottom:8px;text-transform:uppercase">
@@ -265,7 +272,16 @@ const WBModule = {
   },
 
   printReport() {
-    if (!this.lastResult) { alert('Calcule el peso y balance primero.'); return; }
+    if (!this.lastResult) {
+      const btn = document.querySelector('.wb-actions .btn-secondary:last-child');
+      if (btn) {
+        const orig = btn.textContent;
+        btn.textContent = '⚠️ Calcule primero';
+        btn.style.color = 'var(--accent-red)';
+        setTimeout(() => { btn.textContent = orig; btn.style.color = ''; }, 2000);
+      }
+      return;
+    }
     window.print();
   },
 

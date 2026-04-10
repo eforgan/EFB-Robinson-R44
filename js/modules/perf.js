@@ -136,9 +136,9 @@ const PerfModule = {
   },
 
   calcDA() {
-    const pa  = parseFloat(document.getElementById('da-pa')?.value) || 0;
-    const oat = parseFloat(document.getElementById('da-oat')?.value) || 15;
-    const qnh = parseFloat(document.getElementById('da-qnh')?.value) || 1013;
+    const pa  = Math.max(0, Math.min(20000, parseFloat(document.getElementById('da-pa')?.value)  || 0));
+    const oat = Math.max(-60, Math.min(55,  parseFloat(document.getElementById('da-oat')?.value) || 15));
+    const qnh = Math.max(940, Math.min(1060,parseFloat(document.getElementById('da-qnh')?.value) || 1013));
 
     const isaTemp  = 15 - (pa / 1000) * 2;
     const paCorrQNH = (1013.25 - qnh) * 27;  // pies por hPa diferencia
@@ -529,10 +529,10 @@ const PerfModule = {
 
   calcFuel() {
     const GAL_TO_L  = 3.78541;
-    const timeMin   = parseFloat(document.getElementById('fuel-time')?.value) || 60;
+    const timeMin   = Math.max(1, Math.min(600, parseFloat(document.getElementById('fuel-time')?.value) || 60));
     const pct       = parseInt(document.getElementById('fuel-pct')?.value) || 75;
     const resMin    = parseInt(document.getElementById('fuel-res')?.value) || 45;
-    const taxiGal   = parseFloat(document.getElementById('fuel-taxi')?.value) || 1.5;
+    const taxiGal   = Math.max(0, Math.min(5,   parseFloat(document.getElementById('fuel-taxi')?.value) || 1.5));
 
     const fuelFlow  = PERF_DATA.powerTable.find(p => p.pct === pct)?.ff || 12.6;
     const tripGal   = (timeMin / 60) * fuelFlow;

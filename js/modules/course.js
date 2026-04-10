@@ -214,10 +214,7 @@ const ManualModule = {
   },
 
   gotoPage(page) {
-    const iframe = document.getElementById('pdf-iframe');
-    if (iframe) {
-      iframe.src = `docs/R442FM.pdf#page=${page}`;
-    }
+    window.open(`docs/R442FM.pdf#page=${page}`, '_blank');
   },
 
   openPDFPage(page) {

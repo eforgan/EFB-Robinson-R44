@@ -1,0 +1,16 @@
+{
+  "name": "efb-robinson-r44",
+  "version": "4.0.0",
+  "description": "Electronic Flight Bag para Robinson R44 II — Checklists, Performance, Peso y Balance, Curso",
+  "main": "index.html",
+  "scripts": {
+    "start": "python3 -m http.server 8080 || python -m http.server 8080",
+    "serve": "npx serve ."
+  },
+  "keywords": ["aviation", "efb", "robinson", "r44", "helicopter", "flight-bag"],
+  "author": "MODENA CEAC",
+  "license": "MIT",
+  "devDependencies": {
+    "sharp": "^0.34.5"
+  }
+}

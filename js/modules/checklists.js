@@ -162,7 +162,7 @@ const ChecklistModule = {
     if (!list) return;
     const total = this._countItems(list);
     const checked = this.checks[listId] ? this.checks[listId].size : 0;
-    const btn = document.querySelector(`.cl-btn[data-id="${listId}"] .cl-progress`);
+    const btn = document.querySelector(`.cl-btn[data-id="${CSS.escape(listId)}"] .cl-progress`);
     if (btn) btn.textContent = `${checked}/${total}`;
   },
 
@@ -191,7 +191,13 @@ const ChecklistModule = {
     Object.keys(this.checks).forEach(k => {
       data[k] = [...this.checks[k]];
     });
-    try { localStorage.setItem('efb_r44_checklists', JSON.stringify(data)); } catch(e) {}
+    try {
+      localStorage.setItem('efb_r44_checklists', JSON.stringify(data));
+    } catch(e) {
+      if (e.name === 'QuotaExceededError' || e.name === 'NS_ERROR_DOM_QUOTA_REACHED') {
+        console.warn('EFB: localStorage lleno — no se pudo guardar el progreso.');
+      }
+    }
   },
 
   _loadFromStorage() {

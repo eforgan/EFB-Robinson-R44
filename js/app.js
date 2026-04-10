@@ -22,8 +22,12 @@ const App = {
     // Reloj UTC
     this._startClock();
 
-    // Manejar orientación y resize
-    window.addEventListener('resize', () => this._handleResize());
+    // Manejar orientación y resize (con debounce para evitar redraws múltiples)
+    let _resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(_resizeTimer);
+      _resizeTimer = setTimeout(() => this._handleResize(), 150);
+    });
 
     this._startPhotoRotator();
 
@@ -183,7 +187,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Registrar Service Worker (offline + PWA instalable)
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js').catch(() => {});
+    navigator.serviceWorker.register('sw.js').catch(err => {
+      console.warn('Service Worker no pudo registrarse:', err);
+    });
   }
 
   // Prevenir zoom en doble-tap en tablet
