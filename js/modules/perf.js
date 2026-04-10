@@ -697,6 +697,13 @@ const PerfModule = {
     if (tab === 'vrs')   { setTimeout(() => { this.calcVRS(); this.drawVRS(); }, 80); }
     if (tab === 'units') { setTimeout(() => this._initConverters(), 50); }
     if (tab === 'route') { setTimeout(() => this.calcRoute(),   50); }
+    if (tab === 'timer') {
+      clearInterval(this._utcInterval);
+      this._updateTimerUTC();
+      this._utcInterval = setInterval(() => this._updateTimerUTC(), 1000);
+    } else {
+      clearInterval(this._utcInterval);
+    }
   },
 
   /* ══════════════════════════════════════════════════════════════
@@ -1320,6 +1327,7 @@ const PerfModule = {
   _timerInterval: null,
   _timerSeconds: 0,
   _timerRunning: false,
+  _utcInterval: null,
 
   _renderTimer() {
     return `
