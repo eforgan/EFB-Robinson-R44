@@ -171,7 +171,7 @@ const PerfModule = {
         status.push(`<span style="color:#00d4a1">✓ Performance dentro de rangos normales para MTOW (2500 lbs / 1134 kg)</span>`);
       }
       status.push(`<span style="color:#8b9ab8">T° ISA a ${pa.toLocaleString()} ft = ${isaTemp.toFixed(1)}°C &nbsp;|&nbsp; Desvío ISA: ${(oat-isaTemp).toFixed(1)}°C</span>`);
-      analysis.innerHTML = status.map(s => `<div style="padding:4px 0;font-size:12px">${s}</div>`).join('');
+      analysis.innerHTML = status.map(s => `<div style="padding:4px 0;font-size:var(--fs-sm)">${s}</div>`).join('');
     }
   },
 
@@ -220,7 +220,7 @@ const PerfModule = {
               <input type="number" class="form-input" id="hov-da" value="0" oninput="PerfModule.checkHover()">
             </div>
             <div class="form-row">
-              <label class="form-label">Peso bruto (lbs) <span id="hov-gw-kg" style="color:var(--accent-blue);font-size:10px"></span></label>
+              <label class="form-label">Peso bruto (lbs) <span id="hov-gw-kg" style="color:var(--accent-blue);font-size:var(--fs-xs)"></span></label>
               <input type="number" class="form-input" id="hov-gw" value="2500" oninput="PerfModule.checkHover()">
             </div>
           </div>
@@ -293,13 +293,13 @@ const PerfModule = {
     const boxHTML = (label, pct) => pct ? `
       <div class="result-box">
         <div class="result-label">${label}</div>
-        <div class="result-value" style="color:${statusColor(pct)};font-size:28px">${pct.toFixed(1)}%</div>
+        <div class="result-value" style="color:${statusColor(pct)};font-size:var(--fs-2xl)">${pct.toFixed(1)}%</div>
         <div style="margin-top:4px">
-          <span style="font-family:monospace;font-size:18px;font-weight:700;color:var(--accent-blue)">
+          <span style="font-family:monospace;font-size:var(--fs-lg);font-weight:700;color:var(--accent-blue)">
             ${pctToMAP(pct)} inHg
           </span>
         </div>
-        <div style="font-size:10px;color:var(--text-muted);margin-top:2px">MAP manifold pressure</div>
+        <div style="font-size:var(--fs-xs);color:var(--text-muted);margin-top:2px">MAP manifold pressure</div>
         <div class="result-unit" style="color:${statusColor(pct)};margin-top:6px">${statusText(pct)}</div>
       </div>
     ` : `<div class="result-box"><div class="result-label">${label}</div><div class="result-value">--</div></div>`;
@@ -309,7 +309,7 @@ const PerfModule = {
         ${boxHTML('OGE Power Required', ogeP)}
         ${boxHTML('IGE Power Required (~3 ft)', igeP)}
       </div>
-      <div style="font-size:10px;color:var(--text-muted);margin-top:8px;padding:6px 8px;background:rgba(255,255,255,0.03);border-radius:6px;border-left:2px solid var(--border-bright)">
+      <div style="font-size:var(--fs-xs);color:var(--text-muted);margin-top:8px;padding:6px 8px;background:rgba(255,255,255,0.03);border-radius:6px;border-left:2px solid var(--border-bright)">
         MAP calculado para IO-540-AE1A5 a 2550 RPM — MAP máx a ${da.toLocaleString()} ft DA: ${maxMAP.toFixed(1)} inHg
         &nbsp;|&nbsp; Verificar siempre con instrumentos reales
       </div>
@@ -663,7 +663,7 @@ const PerfModule = {
 
       <div class="perf-section-title" style="margin-top:16px">⚠️ Curva H-V (Alturas y Velocidades Críticas)</div>
       <div class="calc-card" style="background:rgba(255,68,85,0.08);border:1px solid rgba(255,68,85,0.3);border-radius:10px;padding:14px">
-        <div style="font-size:13px;color:var(--text-primary);line-height:1.7">
+        <div style="font-size:var(--fs-base);color:var(--text-primary);line-height:1.7">
           La zona de altura/velocidad peligrosa (Dead Man's Curve) define las combinaciones de <strong>altitud AGL</strong> y
           <strong>velocidad de avance</strong> donde una falla de motor no garantiza autorrotación segura.<br><br>
           <strong style="color:#ff7a30">Zona más crítica:</strong> Altitudes entre 0-500 ft AGL combinadas con velocidades inferiores a 25-30 KIAS.<br>
@@ -681,7 +681,7 @@ const PerfModule = {
       ].map(([t,d]) => `
         <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:12px;margin-bottom:8px">
           <div style="font-weight:700;color:var(--accent-amber);margin-bottom:4px">${t}</div>
-          <div style="font-size:13px;color:var(--text-secondary)">${d}</div>
+          <div style="font-size:var(--fs-base);color:var(--text-secondary)">${d}</div>
         </div>
       `).join('')}
     `;
@@ -772,7 +772,7 @@ const PerfModule = {
           <div class="calc-title">⚠️ Parámetros de la Curva H-V</div>
 
           <div class="form-row">
-            <label class="form-label">Peso bruto (lbs) <span id="hv-weight-kg" style="color:var(--accent-blue);font-size:10px">= 1134 kg</span></label>
+            <label class="form-label">Peso bruto (lbs) <span id="hv-weight-kg" style="color:var(--accent-blue);font-size:var(--fs-xs)">= 1134 kg</span></label>
             <input type="number" class="form-input" id="hv-weight" value="2500" min="1500" max="2500" step="50"
               oninput="PerfModule.drawHVCurve()">
           </div>
@@ -801,7 +801,7 @@ const PerfModule = {
           </div>
 
           <div style="border-top:1px solid var(--border);margin:14px 0 12px"></div>
-          <div style="font-size:11px;color:var(--text-secondary);line-height:1.7">
+          <div style="font-size:var(--fs-sm);color:var(--text-secondary);line-height:1.7">
             <div style="color:var(--accent-red);font-weight:700;margin-bottom:4px">ZONA ROJA = EVITAR</div>
             En esa zona, una falla de motor no garantiza autorrotación segura.
             <br><br>
@@ -850,7 +850,7 @@ const PerfModule = {
 
           <div class="result-box" id="vne-result-box" style="margin-top:16px">
             <div class="result-label">Vne a esta altitud</div>
-            <div class="result-value" id="vne-result" style="font-size:44px">120</div>
+            <div class="result-value" id="vne-result" style="font-size:var(--fs-3xl)">120</div>
             <div class="result-unit">KIAS</div>
           </div>
 
@@ -904,8 +904,8 @@ const PerfModule = {
         lines.push(`<span style="color:#ff7a30">⚠️ Reducción: ${reduction} KIAS (${Math.floor(excessFt/1000)} × 1000 ft × 3 KIAS/1000 ft)</span>`);
         lines.push(`<span style="color:#f5a623">→ Vne ajustada: <strong>${vne} KIAS</strong> a ${alt.toLocaleString()} ft MSL</span>`);
       }
-      lines.push(`<span style="color:#8b9ab8;font-size:11px">Velocidad de crucero 75% = ~${Math.min(100, vne-15)} KIAS — siempre mantener margen de seguridad bajo Vne</span>`);
-      ana.innerHTML = lines.map(l => `<div style="padding:4px 0;font-size:12px">${l}</div>`).join('');
+      lines.push(`<span style="color:#8b9ab8;font-size:var(--fs-sm)">Velocidad de crucero 75% = ~${Math.min(100, vne-15)} KIAS — siempre mantener margen de seguridad bajo Vne</span>`);
+      ana.innerHTML = lines.map(l => `<div style="padding:4px 0;font-size:var(--fs-sm)">${l}</div>`).join('');
     }
   },
 
@@ -941,7 +941,7 @@ const PerfModule = {
             </div>
           </div>
           <div id="told-output">
-            <div class="calc-card" style="height:100%;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:13px">
+            <div class="calc-card" style="height:100%;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:var(--fs-base)">
               Ingrese datos para generar TOLD Card
             </div>
           </div>
@@ -949,10 +949,10 @@ const PerfModule = {
         <div id="told-print-area" class="told-card" style="display:none">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--accent-amber)">
             <div>
-              <div style="font-size:18px;font-weight:700;color:var(--accent-amber)">TOLD CARD — Robinson R44 II</div>
-              <div style="font-size:11px;color:var(--text-muted)" id="told-timestamp"></div>
+              <div style="font-size:var(--fs-lg);font-weight:700;color:var(--accent-amber)">TOLD CARD — Robinson R44 II</div>
+              <div style="font-size:var(--fs-sm);color:var(--text-muted)" id="told-timestamp"></div>
             </div>
-            <button class="btn-secondary" onclick="window.print()" style="font-size:12px">🖨️ Imprimir</button>
+            <button class="btn-secondary" onclick="window.print()" style="font-size:var(--fs-sm)">🖨️ Imprimir</button>
           </div>
           <div id="told-print-content"></div>
         </div>
@@ -1027,7 +1027,7 @@ const PerfModule = {
           <div class="told-row"><span class="told-label">OAT</span><span class="told-val">${oat}°C (ISA ${oat>isaTemp?'+':''}${(oat-isaTemp).toFixed(1)}°C)</span></div>
           <div class="told-row"><span class="told-label">QNH</span><span class="told-val">${qnh} hPa</span></div>
           <div class="told-row"><span class="told-label">Presión Alt. (PA)</span><span class="told-val">${Math.round(pa).toLocaleString()} ft</span></div>
-          <div class="told-row"><span class="told-label" style="font-weight:700">Altitud de Densidad</span><span class="told-val" style="font-size:16px;color:${da>8000?'#ff4455':da>5000?'#ff7a30':'#00d4a1'}">${da.toLocaleString()} ft DA</span></div>
+          <div class="told-row"><span class="told-label" style="font-weight:700">Altitud de Densidad</span><span class="told-val" style="font-size:var(--fs-md);color:${da>8000?'#ff4455':da>5000?'#ff7a30':'#00d4a1'}">${da.toLocaleString()} ft DA</span></div>
         </div>
 
         <div class="told-section">
@@ -1058,7 +1058,7 @@ const PerfModule = {
           <div class="told-row"><span class="told-label">Descenso máx. IFR</span><span class="told-val">N/A (VFR only)</span></div>
         </div>
       </div>
-      <div style="margin-top:12px;padding:10px 12px;background:rgba(245,166,35,0.08);border:1px solid rgba(245,166,35,0.3);border-radius:8px;font-size:11px;color:var(--text-secondary)">
+      <div style="margin-top:12px;padding:10px 12px;background:rgba(245,166,35,0.08);border:1px solid rgba(245,166,35,0.3);border-radius:8px;font-size:var(--fs-sm);color:var(--text-secondary)">
         ⚠️ SOLO REFERENCIA — Verificar con el POH oficial aprobado del helicóptero específico antes de todo vuelo.
         Generado: <span id="told-time-inline"></span>
       </div>
@@ -1080,7 +1080,7 @@ const PerfModule = {
       <div class="vrs-layout">
         <div class="hv-controls-card">
           <div class="calc-title">🌀 Verificador VRS</div>
-          <div style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;line-height:1.6">
+          <div style="font-size:var(--fs-sm);color:var(--text-secondary);margin-bottom:12px;line-height:1.6">
             El VRS (Vortex Ring State) ocurre cuando el rotor re-ingresa su propio estela.<br>
             Condición principal: descenso vertical o semi-vertical a baja velocidad de avance.
           </div>
@@ -1099,7 +1099,7 @@ const PerfModule = {
           </div>
 
           <div style="border-top:1px solid var(--border);margin:14px 0 12px"></div>
-          <div style="font-size:11px;color:var(--text-secondary);line-height:1.7">
+          <div style="font-size:var(--fs-sm);color:var(--text-secondary);line-height:1.7">
             <div style="color:#ff4455;font-weight:700;margin-bottom:4px">ZONA ROJA = RIESGO VRS</div>
             Descenso &gt;300 FPM con &lt;15 KIAS de avance = condición peligrosa.<br><br>
             <div style="color:#ff7a30;font-weight:700;margin-bottom:4px">ZONA NARANJA = PRECAUCIÓN</div>
@@ -1364,14 +1364,14 @@ const PerfModule = {
         <div class="calc-card">
           <div class="calc-title">🕐 Referencia de Tiempo — UTC</div>
           <div style="text-align:center">
-            <div style="font-family:monospace;font-size:36px;font-weight:700;color:var(--accent-blue);text-shadow:0 0 15px rgba(74,158,255,0.4)" id="timer-utc">--:--:-- UTC</div>
-            <div style="font-size:11px;color:var(--text-muted);margin-top:6px">Hora UTC actual</div>
+            <div style="font-family:monospace;font-size:var(--fs-3xl);font-weight:700;color:var(--accent-blue);text-shadow:0 0 15px rgba(74,158,255,0.4)" id="timer-utc">--:--:-- UTC</div>
+            <div style="font-size:var(--fs-sm);color:var(--text-muted);margin-top:6px">Hora UTC actual</div>
           </div>
 
           <div style="margin-top:20px">
             <div class="calc-title" style="margin-bottom:8px">📋 Registro de Hitos</div>
             <button class="btn-secondary" onclick="PerfModule.timerMark()" style="width:100%;margin-bottom:8px">📍 Marcar punto</button>
-            <div id="timer-marks" style="max-height:200px;overflow-y:auto;font-size:11px;color:var(--text-muted)">
+            <div id="timer-marks" style="max-height:200px;overflow-y:auto;font-size:var(--fs-sm);color:var(--text-muted)">
               <div style="text-align:center;padding:20px;color:var(--text-muted)">Sin marcas aún</div>
             </div>
           </div>
@@ -1454,7 +1454,7 @@ const PerfModule = {
       <div class="wb-result-row"><span class="wb-result-label">Quemado</span><span class="wb-result-val">${burned.toFixed(1)} gal / ${(burned*3.785).toFixed(1)} L</span></div>
       <div class="wb-result-row"><span class="wb-result-label">Remanente</span><span class="wb-result-val ${ok?'ok':'nok'}">${rem.toFixed(1)} gal / ${remL.toFixed(1)} L</span></div>
       <div class="wb-result-row"><span class="wb-result-label">Endurance rem.</span><span class="wb-result-val ${ok?'ok':'nok'}">${remMin.toFixed(0)} min</span></div>
-      <div class="wb-status ${ok?'ok':'nok'}" style="font-size:12px;padding:6px 10px">${ok?'✓ RESERVA SUFICIENTE (>45 min)':'⚠️ RESERVA INSUFICIENTE — ATERRIZAR'}</div>
+      <div class="wb-status ${ok?'ok':'nok'}" style="font-size:var(--fs-sm);padding:6px 10px">${ok?'✓ RESERVA SUFICIENTE (>45 min)':'⚠️ RESERVA INSUFICIENTE — ATERRIZAR'}</div>
     `;
   },
 
@@ -1572,7 +1572,7 @@ const PerfModule = {
             </select>
           </div>
           <div class="form-row">
-            <label class="form-label">Viento de componente (kt) <span style="color:var(--text-muted);font-size:10px">+ =cola / − =frente</span></label>
+            <label class="form-label">Viento de componente (kt) <span style="color:var(--text-muted);font-size:var(--fs-xs)">+ =cola / − =frente</span></label>
             <input type="number" class="form-input" id="rt-wind" value="0" min="-50" max="50" oninput="PerfModule.calcRoute()">
           </div>
           <div class="form-row">
@@ -1594,7 +1594,7 @@ const PerfModule = {
         <div class="calc-card">
           <div class="calc-title">📊 Resumen de Ruta</div>
           <div id="rt-summary" style="display:flex;flex-direction:column;gap:8px">
-            <div style="text-align:center;color:var(--text-muted);padding:30px;font-size:13px">
+            <div style="text-align:center;color:var(--text-muted);padding:30px;font-size:var(--fs-base)">
               Ingrese datos para ver el resumen
             </div>
           </div>

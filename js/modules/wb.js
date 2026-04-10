@@ -39,13 +39,13 @@ const WBModule = {
           <input type="number" id="wb-bew" value="${bew.defaultWeight}" min="1200" max="2000" oninput="WBModule._showKg('wb-bew','kg-bew');WBModule._liveUpdate()">
           <span class="wb-field-unit">lbs</span>
         </div>
-        <div style="font-size:10px;color:var(--accent-blue);padding:0 0 6px 0" id="kg-bew">= ${(bew.defaultWeight*0.4536).toFixed(0)} kg</div>
+        <div style="font-size:var(--fs-xs);color:var(--accent-blue);padding:0 0 6px 0" id="kg-bew">= ${(bew.defaultWeight*0.4536).toFixed(0)} kg</div>
         <div class="wb-row-3">
           <label class="wb-field-label">Brazo vacío (desde mástil)</label>
           <input type="number" id="wb-bew-arm" value="${bew.defaultArm}" min="-10" max="10" step="0.1">
           <span class="wb-field-unit">in</span>
         </div>
-        <div style="font-size:11px;color:var(--text-muted);padding:4px 0 8px">
+        <div style="font-size:var(--fs-sm);color:var(--text-muted);padding:4px 0 8px">
           ⚠️ Usar valores del libro W&amp;B individual del helicóptero
         </div>
       </div>
@@ -57,11 +57,11 @@ const WBModule = {
       const s = stations.find(x => x.id === id);
       html += `
         <div class="wb-row-3">
-          <label class="wb-field-label">${s.labelShort} <span style="color:var(--text-muted);font-size:10px">(brazo ${s.arm}")</span></label>
+          <label class="wb-field-label">${s.labelShort} <span style="color:var(--text-muted);font-size:var(--fs-xs)">(brazo ${s.arm}")</span></label>
           <input type="number" id="wb-${id}" value="${s.defaultWeight}" min="0" max="400" oninput="WBModule._liveUpdate();WBModule._showKg('wb-${id}','kg-${id}')">
           <span class="wb-field-unit">lbs</span>
         </div>
-        <div style="font-size:10px;color:var(--accent-blue);padding:0 0 6px 0" id="kg-${id}">${s.defaultWeight>0?'= '+(s.defaultWeight*0.4536).toFixed(0)+' kg':''}</div>
+        <div style="font-size:var(--fs-xs);color:var(--accent-blue);padding:0 0 6px 0" id="kg-${id}">${s.defaultWeight>0?'= '+(s.defaultWeight*0.4536).toFixed(0)+' kg':''}</div>
       `;
     });
     html += `</div>`;
@@ -72,7 +72,7 @@ const WBModule = {
       <div class="wb-section">
         <div class="wb-section-title">⛽ Combustible</div>
         <div class="wb-row-3">
-          <label class="wb-field-label">Combustible <span style="color:var(--text-muted);font-size:10px">(brazo +5.5")</span></label>
+          <label class="wb-field-label">Combustible <span style="color:var(--text-muted);font-size:var(--fs-xs)">(brazo +5.5")</span></label>
           <input type="number" id="wb-fuel-gal" value="${Math.round(fuel.defaultWeight/6)}" min="0" max="30"
             oninput="WBModule._fuelGalToLbs()" step="0.5">
           <span class="wb-field-unit">gal</span>
@@ -89,7 +89,7 @@ const WBModule = {
             oninput="WBModule._fuelLbsToGal();WBModule._liveUpdate()">
           <span class="wb-field-unit">lbs</span>
         </div>
-        <div style="font-size:10px;color:var(--text-muted);padding:2px 0 8px">
+        <div style="font-size:var(--fs-xs);color:var(--text-muted);padding:2px 0 8px">
           1 US gal AVGAS 100LL ≈ 6.0 lbs (2.72 kg) &nbsp;|&nbsp; Máx.: 29.5 gal = 177 lbs (80.3 kg) = 111.6 L
         </div>
       </div>
@@ -101,7 +101,7 @@ const WBModule = {
       <div class="wb-section">
         <div class="wb-section-title">🧳 Equipaje</div>
         <div class="wb-row-3">
-          <label class="wb-field-label">Equipaje <span style="color:var(--text-muted);font-size:10px">(brazo +13.5", máx 50 lbs)</span></label>
+          <label class="wb-field-label">Equipaje <span style="color:var(--text-muted);font-size:var(--fs-xs)">(brazo +13.5", máx 50 lbs)</span></label>
           <input type="number" id="wb-baggage" value="${bag.defaultWeight}" min="0" max="50" oninput="WBModule._liveUpdate()">
           <span class="wb-field-unit">lbs</span>
         </div>
@@ -207,7 +207,7 @@ const WBModule = {
     const fmt = (v, dec=1) => v.toLocaleString(undefined, { minimumFractionDigits: dec, maximumFractionDigits: dec });
 
     resDiv.innerHTML = `
-      <div style="font-size:12px;font-weight:700;color:var(--accent-amber);margin-bottom:8px;text-transform:uppercase">
+      <div style="font-size:var(--fs-sm);font-weight:700;color:var(--accent-amber);margin-bottom:8px;text-transform:uppercase">
         Resultado del Cálculo
       </div>
       <div class="wb-result-row">
@@ -240,7 +240,7 @@ const WBModule = {
         <span class="wb-result-label">Momento total</span>
         <span class="wb-result-val">${fmt(totalMoment,0)} lb·in</span>
       </div>
-      ${!bagOK ? `<div style="color:var(--accent-red);font-size:11px;padding:4px 0">⚠️ Equipaje excede límite de ${limits.maxBaggage} lbs</div>` : ''}
+      ${!bagOK ? `<div style="color:var(--accent-red);font-size:var(--fs-sm);padding:4px 0">⚠️ Equipaje excede límite de ${limits.maxBaggage} lbs</div>` : ''}
       <div class="wb-status ${overallOK?'ok':'nok'}">
         ${overallOK ? '✓ DENTRO DEL ENVELOPE — APROBADO' : '✗ FUERA DEL ENVELOPE — NO VOLAR'}
       </div>

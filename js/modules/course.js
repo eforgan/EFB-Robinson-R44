@@ -96,7 +96,7 @@ const CourseModule = {
         <div class="course-topic-header">
           <div class="course-num-badge">TEMA ${topic.id} DE ${COURSE_DATA.topics.length}</div>
           <div class="course-topic-title">${topic.title}</div>
-          <div style="font-size:13px;color:var(--text-secondary);margin-bottom:8px">${topic.subtitle}</div>
+          <div style="font-size:var(--fs-base);color:var(--text-secondary);margin-bottom:8px">${topic.subtitle}</div>
           <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
             <a class="poh-link-btn" href="docs/R442FM.pdf#page=${topic.pohPages[0]}" target="_blank">
               📄 POH ${topic.pohSection} — Pág. ${topic.pohPages[0]}
@@ -104,7 +104,7 @@ const CourseModule = {
             ${topic.pohPages[1] ? `<a class="poh-link-btn" href="docs/R442FM.pdf#page=${topic.pohPages[1]}" target="_blank">
               📄 Hasta pág. ${topic.pohPages[1]}
             </a>` : ''}
-            <span style="font-size:11px;color:var(--text-muted)">* Verificar páginas en el POH del helicóptero</span>
+            <span style="font-size:var(--fs-sm);color:var(--text-muted)">* Verificar páginas en el POH del helicóptero</span>
           </div>
         </div>
 
@@ -179,7 +179,7 @@ const ManualModule = {
     viewer.innerHTML = `
       <div class="manual-content">
         <div class="manual-section-header">Sección ${num} — ${s.title}</div>
-        <p style="font-size:13px;color:var(--text-secondary);margin-bottom:14px">${s.desc}</p>
+        <p style="font-size:var(--fs-base);color:var(--text-secondary);margin-bottom:14px">${s.desc}</p>
 
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
           <button class="btn-primary" onclick="ManualModule.openPDFPage(${s.pages[0]})">
@@ -190,22 +190,22 @@ const ManualModule = {
           </button>
         </div>
 
-        <div class="manual-section-header" style="font-size:14px;margin-bottom:8px">Acceso rápido por página</div>
+        <div class="manual-section-header" style="font-size:var(--fs-base);margin-bottom:8px">Acceso rápido por página</div>
         <div class="manual-page-links">${pageLinksHTML}</div>
 
         <div style="background:rgba(74,158,255,0.06);border:1px solid rgba(74,158,255,0.25);border-radius:12px;padding:24px;text-align:center;margin-top:8px">
           <div style="font-size:32px;margin-bottom:12px">📄</div>
-          <div style="font-size:15px;font-weight:700;color:var(--text-primary);margin-bottom:6px">
+          <div style="font-size:var(--fs-md);font-weight:700;color:var(--text-primary);margin-bottom:6px">
             Sección ${num} — ${s.title}
           </div>
-          <div style="font-size:12px;color:var(--text-secondary);margin-bottom:20px">
+          <div style="font-size:var(--fs-sm);color:var(--text-secondary);margin-bottom:20px">
             Páginas ${s.pages[0]}–${s.pages[1]} del POH Robinson R44 II
           </div>
-          <button class="btn-primary" style="font-size:15px;padding:14px 28px;margin-bottom:10px"
+          <button class="btn-primary" style="font-size:var(--fs-md);padding:14px 28px;margin-bottom:10px"
             onclick="window.open('docs/R442FM.pdf#page=${s.pages[0]}','_blank')">
             📖 Abrir Sección en Visor PDF
           </button>
-          <div style="font-size:11px;color:var(--text-muted);margin-top:12px">
+          <div style="font-size:var(--fs-sm);color:var(--text-muted);margin-top:12px">
             Se abrirá en una nueva pestaña del navegador
           </div>
         </div>
